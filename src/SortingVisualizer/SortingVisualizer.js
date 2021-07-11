@@ -1,6 +1,17 @@
 import React from "react";
+import { getMergeSortAnimations } from "../SortingAlgorithms/sortingAlgorithms";
 import "./SortingVisualizer.css";
-import * as sortingAlgorithms from "../SortingAlgorithms/sortingAlgorithms";
+// Speed of the animations
+const ANIMATION_SPEED = 1;
+
+// Number of bars in the array.
+const NUMBER_OF_ARRAY_BARS = 310;
+
+// Color of array bars
+const PRIMARY_COLOR = "turquoise";
+
+// Color of array bars that are being compared during each iteration of the algorithm
+const SECONDARY_COLOR = "yellow";
 
 class SortingVisualizer extends React.Component {
   constructor(props) {
@@ -10,6 +21,7 @@ class SortingVisualizer extends React.Component {
     };
   }
   componentDidMount() {
+    //when component initially loads, the array gets reset
     this.resetArray();
   }
   randomNumFromInterval(min, max) {
@@ -17,7 +29,7 @@ class SortingVisualizer extends React.Component {
   }
   resetArray() {
     const array = [];
-    for (let i = 0; i < 310; i++) {
+    for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
       array.push(this.randomNumFromInterval(5, 750));
     }
 
@@ -25,8 +37,27 @@ class SortingVisualizer extends React.Component {
   }
 
   mergeSort() {
-    const sortedArray = sortingAlgorithms.mergeSort(this.state.array);
-    console.log(sortedArray);
+    const animations = getMergeSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED);
+      }
+    }
   }
   quickSort() {}
   heapSort() {}
@@ -43,7 +74,7 @@ class SortingVisualizer extends React.Component {
               className="array-bar"
               key={idx}
               style={{
-                backgroundColor: "pink",
+                backgroundColor: "turquoise",
                 height: `${value}px`,
               }}
             />
