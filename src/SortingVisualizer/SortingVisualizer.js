@@ -5,8 +5,8 @@ import "./SortingVisualizer.css";
 const ANIMATION_SPEED = 1;
 
 // Number of bars in the array.
-const NUMBER_OF_ARRAY_BARS = 310;
-
+const NUMBER_OF_ARRAY_BARS = (window.screen.width * 0.5) / 6;
+console.log(window.screen.width);
 // Color of array bars
 const PRIMARY_COLOR = "turquoise";
 
@@ -30,7 +30,7 @@ class SortingVisualizer extends React.Component {
   resetArray() {
     const array = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-      array.push(this.randomNumFromInterval(5, 750));
+      array.push(this.randomNumFromInterval(5, 600));
     }
 
     this.setState({ array });
@@ -68,6 +68,23 @@ class SortingVisualizer extends React.Component {
 
     return (
       <div className="array-container">
+        <div className="buttons-flex">
+          <button className="ui  teal button" onClick={() => this.resetArray()}>
+            Generate New Array
+          </button>
+          <button className="ui  teal button" onClick={() => this.mergeSort()}>
+            Merge Sort
+          </button>
+          <button className="ui  teal button" onClick={() => this.quickSort()}>
+            Quick Sort
+          </button>
+          <button className="ui  teal button" onClick={() => this.heapSort()}>
+            Heap Sort
+          </button>
+          <button className="ui  teal button" onClick={() => this.bubbleSort()}>
+            Bubble Sort
+          </button>
+        </div>
         <div>
           {array.map((value, idx) => (
             <div
@@ -79,13 +96,6 @@ class SortingVisualizer extends React.Component {
               }}
             />
           ))}
-        </div>
-        <div>
-          <button onClick={() => this.resetArray()}>Generate New Array</button>
-          <button onClick={() => this.mergeSort()}>Merge Sort</button>
-          <button onClick={() => this.quickSort()}>Quick Sort</button>
-          <button onClick={() => this.heapSort()}>Heap Sort</button>
-          <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
         </div>
       </div>
     );
