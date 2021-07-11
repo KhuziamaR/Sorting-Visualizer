@@ -1,6 +1,6 @@
 # Sorting Visualizer built using ReactJS 
 # Video Walkthrough
-<img src="https://imgur.com/a/8j2yjv5.gif" width="40" height="40" />
+
 
 # Getting Started with Create React App
 
