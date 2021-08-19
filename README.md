@@ -1,7 +1,6 @@
 # Sorting Visualizer built using ReactJS 
 # URL 
-You can view the web app at this URL: [Click to view app](https://khuziama-sorting-visualizer.vercel.app/)
-If the link above does has issues, you can visit https://khuziama-sorting-visualizer.vercel.app/ to view the app
+You can view the web app at this URL: [Click to view app](https://khuziama-sorting-visualizer.vercel.app/) https://khuziama-sorting-visualizer.vercel.app/
 # Video Walkthrough
 ![Alt Text](sorting_visualizer.gif)
 # Getting Started with Create React App
